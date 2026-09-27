@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260925-05-46ec85d","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}');</script><script src="/_sdk/6542d56fbfe7a3eb.telemetry_sdk.js" integrity="sha512-ECdM0nK7EkwDuOqho2qxgyRQXyBHk9hZqRKMBr+Xsu6zjeHlt+qkO2N2YRiHN7Kg4e1fEHDhjIp4bGJYVypv1g=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hook the Fish: Variables &amp; Data Types</title>
+  <style>
+    :root{
+      --navy:#06283d;--deep:#073f5c;--blue:#087eab;--cyan:#39d8e6;--aqua:#67f0d4;
+      --foam:#efffff;--coral:#ff7657;--gold:#ffd166;--green:#13795b;--red:#c63d4d;
+      --ink:#083246;--muted:#466974;--card:#f8ffff;
+    }
+    *{box-sizing:border-box}
+    html{background:var(--navy)}
+    body{width:100%;min-width:320px;margin:0;background:var(--navy);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}
+    button{font:inherit}
+    button:focus-visible{outline:4px solid var(--gold);outline-offset:4px}
+    button:disabled{cursor:not-allowed;opacity:.55}
+    .hidden{display:none!important}
+    .screen{width:100%;min-height:calc(100 * min(var(--vh,1vh),1vh))}
+    .ocean{
+      position:relative;overflow:hidden;
+      background:radial-gradient(circle at 10% 8%,rgba(103,240,212,.24),transparent 22%),
+      radial-gradient(circle at 88% 15%,rgba(255,255,255,.17),transparent 17%),
+      linear-gradient(155deg,#052c47,#087eab 50%,#70d9df)
+    }
+    .ocean:before{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+      background-image:radial-gradient(circle,rgba(255,255,255,.32) 0 2px,transparent 3px);
+      background-size:86px 86px
+    }
+    .shell{position:relative;z-index:1;width:min(1120px,92%);margin:auto;padding:30px 0}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff;margin-bottom:20px}
+    .mark{width:52px;height:52px;display:grid;place-items:center;background:var(--gold);border-radius:17px;font-size:27px;box-shadow:0 7px 0 rgba(0,0,0,.18)}
+    .brand p{margin:0;font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    .glass{background:rgba(248,255,255,.95);border:1px solid rgba(255,255,255,.82);border-radius:30px;box-shadow:0 24px 60px rgba(1,30,47,.3);backdrop-filter:blur(12px)}
+    .home-card{padding:clamp(24px,5vw,52px);display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+    .eyebrow{display:inline-block;padding:7px 12px;margin:0 0 12px;border-radius:999px;font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .title{font-size:clamp(3rem,8vw,6rem);line-height:.9;letter-spacing:-.065em;margin:0 0 16px}
+    .subtitle{font-size:clamp(1.05rem,2.2vw,1.35rem);line-height:1.55;margin:0 0 20px;max-width:590px}
+    .btn{border:0;border-radius:16px;padding:14px 20px;font-weight:900;cursor:pointer;transition:transform .16s,filter .16s,box-shadow .16s}
+    .btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.06)}
+    .btn:active:not(:disabled){transform:translateY(2px)}
+    .primary{background:var(--coral);color:#fff;box-shadow:0 6px 0 #b94939}
+    .secondary{background:#d8f8fa;color:var(--deep);box-shadow:inset 0 0 0 2px #aee5e7}
+    .danger{background:var(--red);color:#fff;box-shadow:0 6px 0 #862433}
+    .lesson{padding:25px;border-radius:24px;background:linear-gradient(145deg,#063c5a,#087e8b);color:#fff}
+    .lesson h2{margin:0 0 10px;font-size:1.5rem}.lesson p{line-height:1.58;margin:0}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.tags span{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.15);font-size:.88rem;font-weight:800}
+    .rules{grid-column:1/-1}.rules h2{margin:0 0 14px}
+    .rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .rule{display:flex;gap:12px;align-items:flex-start;padding:16px;background:#fff;border:1px solid #d4efef;border-radius:18px}
+    .rule b{display:grid;place-items:center;flex:0 0 auto;width:38px;height:38px;border-radius:12px;background:#d7fbf6}
+    .rule p{margin:0;line-height:1.46;font-size:.93rem;font-weight:650}
+    footer{position:relative;z-index:1;padding:15px;text-align:center;color:#e6ffff;font-size:.88rem;font-weight:800}
+
+    .game{width:100%;min-height:calc(100 * min(var(--vh,1vh),1vh));background:#d9f8f7}
+    .hud{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 4%;background:var(--navy);color:#fff}
+    .game-name{font-weight:900;font-size:1.08rem}.hud-items{display:flex;gap:8px;flex-wrap:wrap}
+    .hudbox{min-width:86px;padding:8px 11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:13px}
+    .hudbox small{display:block;color:#a5efe7;text-transform:uppercase;letter-spacing:.08em;font-size:.62rem;font-weight:900}
+    .hudbox strong{display:block;margin-top:2px}.exit{padding:9px 12px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:12px;font-weight:800;cursor:pointer}
+    .low{color:var(--gold);animation:pulse .8s infinite}
+    .game-main{width:min(1120px,96%);margin:auto;padding:15px 0}
+    .rounds{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+    .round{padding:11px;border:2px solid #bde9e8;border-radius:16px;background:#fff;text-align:center;font-weight:900}
+    .round small{display:block;margin-top:3px;color:#4d6f78}.round.active{background:#d7fbf6;border-color:var(--blue)}.round.complete{background:#e1f8eb;border-color:#57b991;color:#126446}.round.locked{background:#e6eeee;border-color:#cedddd;color:#71858b}
+    .stage-head{display:flex;justify-content:space-between;align-items:end;gap:12px;padding:0 5px 10px}
+    .stage-head h2{margin:0;font-size:clamp(1.2rem,3vw,1.65rem)}.stage-head p{margin:0;font-weight:800;color:#236271}
+    .sea{height:clamp(410px,60vw,570px);position:relative;overflow:hidden;border:5px solid #fff;border-radius:27px;background:linear-gradient(#91e7ee 0%,#48ced8 20%,#098a9b 61%,#064d70 100%);box-shadow:0 17px 34px rgba(6,40,61,.18)}
+    .sky{position:absolute;inset:0 0 59%;background:linear-gradient(#c8f8fb,#8ae0e8)}.sun{position:absolute;right:10%;top:8%;width:70px;height:70px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 11px rgba(255,209,102,.24)}
+    .boat{position:absolute;left:7%;top:20%;font-size:4rem}.waterline{position:absolute;left:-5%;top:38%;width:110%;height:24px;background:repeating-radial-gradient(ellipse at 10% 0,rgba(255,255,255,.78) 0 7px,transparent 8px 22px);animation:water 3s ease-in-out infinite}
+    .band{position:absolute;left:0;right:0;height:20%;background:linear-gradient(90deg,transparent,rgba(0,58,99,.18),transparent)}.band.a{top:48%}.band.b{top:70%}
+    .seabed{position:absolute;bottom:0;width:100%;height:72px;background:radial-gradient(ellipse at 20% 100%,#e8c36e 0 6%,transparent 6.5%),radial-gradient(ellipse at 53% 100%,#e8c36e 0 8%,transparent 8.5%),linear-gradient(#0a6580,#064d70)}
+    .weed{position:absolute;bottom:28px;font-size:3rem;z-index:1;animation:sway 3s ease-in-out infinite alternate}.w1{left:7%}.w2{right:10%;animation-delay:-1.5s}.w3{left:57%;font-size:2.2rem}
+    .bubble{position:absolute;border:2px solid rgba(255,255,255,.7);border-radius:50%;animation:bubble 6s linear infinite}.b1{left:18%;bottom:13%;width:14px;height:14px}.b2{left:68%;bottom:23%;width:19px;height:19px;animation-delay:-2s}.b3{left:84%;bottom:10%;width:10px;height:10px;animation-delay:-4s}
+    .fish{position:absolute;z-index:3;width:88px;height:54px;padding:0;border:0;background:transparent;cursor:pointer;filter:drop-shadow(0 5px 2px rgba(4,50,63,.25));animation:swim var(--speed) linear infinite var(--delay)}
+    .fish:hover .body,.fish:focus-visible .body{filter:brightness(1.14);box-shadow:0 0 0 5px rgba(255,255,255,.4)}
+    .body{position:absolute;left:20px;top:7px;width:60px;height:39px;border-radius:55% 46% 46% 55%;background:var(--fish);transition:.16s}.body:before{content:"";position:absolute;right:10px;top:8px;width:14px;height:14px;border-radius:50%;background:#fff}.body:after{content:"";position:absolute;right:14px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--navy)}
+    .tail{position:absolute;top:12px;left:1px;border-top:15px solid transparent;border-bottom:15px solid transparent;border-right:24px solid var(--fish)}
+    .fish.caught{pointer-events:none;animation:reel .7s ease-in forwards}.hook{position:absolute;z-index:5;top:0;width:2px;height:0;background:#fff;opacity:0}.hook:after{content:"J";position:absolute;bottom:-17px;left:-5px;color:#fff;font:bold 25px Georgia,serif}.hook.cast{opacity:1;animation:drop .42s ease-in forwards,reelhook .42s .52s ease-out forwards}
+    .ripple{position:absolute;z-index:2;width:20px;height:10px;border:3px solid rgba(255,255,255,.9);border-radius:50%;opacity:0;transform:translate(-50%,-50%)}.ripple.show{animation:ripple .9s ease-out forwards}
+    .status{position:absolute;z-index:6;left:50%;bottom:15px;transform:translateX(-50%);width:min(92%,540px);padding:10px 15px;border-radius:14px;background:rgba(6,40,61,.89);color:#fff;text-align:center;font-weight:800}
+    .overlay{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(2,25,39,.76)}.overlay.show{display:flex}
+    .modal{width:min(100%,690px);max-height:calc(90 * min(var(--vh,1vh),1vh));overflow:auto;border-radius:26px;background:#f9ffff;box-shadow:0 28px 80px rgba(0,0,0,.42);animation:modal .25s ease-out}.modal-head{padding:18px 21px;color:#fff;background:linear-gradient(135deg,#06283d,#087e8b)}.modal-head small{font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#bdf8f4}.modal-head p{margin:3px 0 0;font-weight:900}.modal-body{padding:22px}
+    .question{font-size:clamp(1.1rem,3vw,1.45rem);line-height:1.45;margin:0 0 16px}.answers{display:grid;gap:10px}.answer{border:2px solid #bce7e7;background:#e4f8f8;color:#073e53;border-radius:15px;padding:14px;text-align:left;font-weight:800;cursor:pointer;transition:.16s}.answer:hover:not(:disabled){background:#d1f4f2;border-color:var(--blue);transform:translateX(2px)}.answer.correct{background:#dff8e9;border-color:var(--green);color:#075137}.answer.wrong{background:#ffe5e8;border-color:var(--red);color:#8f2030}.feedback{min-height:34px;margin:16px 0 6px;font-weight:900;line-height:1.42}.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}.actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .simple{text-align:center;padding:34px}.simple .icon{font-size:4rem}.simple h2{margin:10px 0;font-size:1.8rem}.simple p{line-height:1.55;color:#315260}
+    .result{width:min(680px,100%);margin:auto;padding:clamp(28px,6vw,52px);text-align:center}.result h1{font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.05em;margin:0 0 10px}.orb{width:150px;height:150px;display:grid;place-items:center;margin:22px auto;border-radius:50%;background:var(--gold);box-shadow:0 0 0 12px rgba(255,255,255,.2);font-size:2.8rem;font-weight:900;color:var(--navy)}.badge{display:inline-block;padding:10px 15px;border-radius:999px;background:#d7fbf6;color:#075c66;font-weight:900}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0}.stat{padding:15px;border-radius:16px;background:#e4fbfb;text-align:left}.stat small{display:block;color:#326270;text-transform:uppercase;letter-spacing:.07em;font-weight:900}.stat strong{font-size:1.12rem}
+    @keyframes swim{from{transform:translateX(-135px) translateY(0)}50%{transform:translateX(52vw) translateY(8px)}to{transform:translateX(calc(100vw + 135px)) translateY(-4px)}}@keyframes reel{to{transform:translate(25%,-215px) scale(.2) rotate(110deg);opacity:0}}@keyframes drop{to{height:290px}}@keyframes reelhook{to{height:8px;opacity:0}}@keyframes ripple{0%{opacity:1;width:20px;height:10px}100%{opacity:0;width:145px;height:55px}}@keyframes bubble{from{transform:translateY(0);opacity:0}15%{opacity:.8}to{transform:translateY(-340px);opacity:0}}@keyframes water{50%{transform:translateY(8px) translateX(15px)}}@keyframes sway{to{transform:rotate(7deg) translateY(-6px)}}@keyframes modal{from{transform:translateY(18px) scale(.96);opacity:0}to{transform:none;opacity:1}}@keyframes pulse{50%{transform:scale(1.08)}}
+    @media(max-width:700px){.home-card{grid-template-columns:1fr;padding:25px}.rule-grid{grid-template-columns:1fr}.hud{justify-content:center}.game-name{width:100%;text-align:center}.hud-items{justify-content:center}.round{padding:8px 4px;font-size:.75rem}.sea{border-width:3px;border-radius:20px}.stats{grid-template-columns:1fr}.actions{justify-content:center}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="/_sdk/6c2ecc939521f244.data_sdk.js" type="text/javascript" integrity="sha512-gRx8s+XsZDN6mSIQu2sivLZysbV0WHhb5kXNUWlgVb5lCMU1foJYukyMEDPv8Tnoocb8iwqB4XdRrWc7oEGzIQ=="></script>
+  <script src="/_sdk/ef0304cb8c7ed696.editing_sdk.js" type="text/javascript" integrity="sha512-kmL9L5Yuj57MQaequKbMA3aGpT/5lBUp10iGA3e3qnmMLs2ZZQ0poCcIfdd5rTgrhEvNPe4HK0ohePW7ZpgAFg=="></script>
+  <script src="/_sdk/ddcab3e45959c817.resizing_sdk.js" type="text/javascript" integrity="sha512-VAviUKfZVzugWBSeULYjSljTX+nb84wc6Zzbx5GQaQgh6X2ISSjXi8eIiCDGdwDh10esJMY0+QFQgUy9NcrTlQ=="></script>
+ </head>
+ <body data-template-id="__page-root" style="background: rgb(6, 40, 61);">
+  <main>
+   <section id="home" class="screen ocean">
+    <div class="shell">
+     <header class="brand">
+      <div class="mark" aria-hidden="true">
+       🎣
+      </div>
+      <p data-template-id="home-brand" class="canva-text" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 12px; letter-spacing: 0.08rem;">Ocean Code Adventure - ICT-10</p>
+     </header>
+     <div class="glass home-card">
+      <div>
+       <p data-template-id="home-tag" class="canva-tag eyebrow" style="background: rgb(215, 251, 246); color: rgb(7, 92, 102); font-weight: 800; font-style: normal; font-size: 12px;">Coding Challenge</p>
+       <h1 data-template-id="game-title" class="canva-text title" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 32px;">Hook the Fish</h1>
+       <p data-template-id="game-subtitle" class="canva-text subtitle" style="color: rgb(36, 75, 90); font-weight: 500; font-style: normal; font-size: 18px; line-height: 1.55;">Master Variables &amp; Data Types while catching fish!</p><button id="start" type="button" data-template-id="start-button" class="canva-button btn primary" disabled="" style="background: rgb(255, 118, 87); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 18px;">Start Game →</button>
+      </div>
+      <aside data-template-id="lesson-panel" class="canva-panel lesson" style="background: linear-gradient(145deg, rgb(6, 60, 90), rgb(8, 126, 139));">
+       <h2 data-template-id="lesson-title" class="canva-text" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 24px;">Today’s Coding Catch</h2>
+       <p data-template-id="lesson-copy" class="canva-text" style="color: rgb(232, 255, 255); font-weight: 400; font-style: normal; font-size: 16px; line-height: 1.58;">Learn how variables hold information and how int, char, boolean, and string data types describe what that information is.</p>
+       <div class="tags" aria-label="Topics covered"><span>int</span><span>char</span><span>boolean</span><span>string</span>
+       </div>
+      </aside>
+      <section class="rules" aria-labelledby="rules-heading">
+       <h2 id="rules-heading" data-template-id="rules-title" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 24px;">How to Play</h2>
+       <div class="rule-grid">
+        <article class="rule">
+         <b aria-hidden="true">🐟</b>
+         <p data-template-id="rule-one" class="canva-text" style="color: rgb(33, 73, 86); font-weight: 600; font-style: normal; font-size: 14px;">Fish swim across the screen. Click or tap to hook one and answer its programming question.</p>
+        </article>
+        <article class="rule">
+         <b aria-hidden="true">✨</b>
+         <p data-template-id="rule-two" class="canva-text" style="color: rgb(33, 73, 86); font-weight: 600; font-style: normal; font-size: 14px;">Correct answers earn +10 points. Complete five questions in every round before moving on.</p>
+        </article>
+        <article class="rule">
+         <b aria-hidden="true">🔒</b>
+         <p data-template-id="rule-three" class="canva-text" style="color: rgb(33, 73, 86); font-weight: 600; font-style: normal; font-size: 14px;">Finish all three rounds in order. Round 2 and Round 3 unlock only after the previous round is complete.</p>
+        </article>
+       </div>
+      </section>
+     </div>
+    </div>
+    <footer data-template-id="footer-text" class="canva-footer" style="color: rgb(230, 255, 255); font-weight: 800; font-style: normal; font-size: 14px;">Catch, learn, and code.</footer>
+   </section>
+   <section id="play" class="game hidden" aria-label="Fishing game">
+    <header class="hud">
+     <div class="game-name">
+      🎣 <span data-template-id="hud-title" class="canva-text" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 18px;">Hook the Fish</span>
+     </div>
+     <div class="hud-items" aria-label="Game status">
+      <div class="hudbox">
+       <small data-template-id="round-label" class="canva-text" style="color: rgb(165, 239, 231); font-weight: 800; font-style: normal; font-size: 10px;">Current Round</small><strong id="hud-round" aria-live="polite"></strong>
+      </div>
+      <div class="hudbox">
+       <small data-template-id="topic-label" class="canva-text" style="color: rgb(165, 239, 231); font-weight: 800; font-style: normal; font-size: 10px;">Topic</small><strong id="hud-topic" aria-live="polite"></strong>
+      </div>
+      <div class="hudbox">
+       <small data-template-id="score-label" class="canva-text" style="color: rgb(165, 239, 231); font-weight: 800; font-style: normal; font-size: 10px;">Live Score</small><strong id="hud-score" aria-live="polite"></strong>
+      </div>
+      <div class="hudbox">
+       <small data-template-id="timer-label" class="canva-text" style="color: rgb(165, 239, 231); font-weight: 800; font-style: normal; font-size: 10px;">Round Timer</small><strong id="hud-time" aria-live="polite"></strong>
+      </div>
+     </div><button id="exit" type="button" data-template-id="exit-button" class="canva-button exit" style="color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 14px;">← Exit to Home</button>
+    </header>
+    <div class="game-main">
+     <nav class="rounds" aria-label="Round progression"><button id="card1" type="button" class="round" disabled=""><span aria-hidden="true">①</span> <span data-template-id="round-one" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 800; font-style: normal; font-size: 14px;">Variables</span><small>0 / 5</small></button> <button id="card2" type="button" class="round locked" disabled=""><span aria-hidden="true">🔒</span> <span data-template-id="round-two" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 800; font-style: normal; font-size: 14px;">Data Types</span><small>Locked</small></button> <button id="card3" type="button" class="round locked" disabled=""><span aria-hidden="true">🔒</span> <span data-template-id="round-three" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 800; font-style: normal; font-size: 14px;">Variables + Data Types</span><small>Locked</small></button>
+     </nav>
+     <div class="stage-head">
+      <h2 id="stage-title"></h2>
+      <p id="progress" aria-live="polite"></p>
+     </div>
+     <section class="sea" aria-label="Fishing water">
+      <div class="sky"></div>
+      <div class="sun" aria-hidden="true"></div>
+      <div class="boat" aria-hidden="true">
+       🛶
+      </div>
+      <div class="waterline"></div>
+      <div class="band a"></div>
+      <div class="band b"></div>
+      <div class="seabed"></div>
+      <div class="weed w1" aria-hidden="true">
+       🌿
+      </div>
+      <div class="weed w2" aria-hidden="true">
+       🌿
+      </div>
+      <div class="weed w3" aria-hidden="true">
+       🌿
+      </div>
+      <div class="bubble b1" aria-hidden="true"></div>
+      <div class="bubble b2" aria-hidden="true"></div>
+      <div class="bubble b3" aria-hidden="true"></div>
+      <div id="hook" class="hook" aria-hidden="true"></div>
+      <div id="ripple" class="ripple" aria-hidden="true"></div><button class="fish" type="button" aria-label="Hook a coral fish" style="top:48%;--fish:#ff7657;--speed:12s;--delay:-2s"><span class="tail"></span><span class="body"></span></button> <button class="fish" type="button" aria-label="Hook a golden fish" style="top:65%;--fish:#ffd166;--speed:16s;--delay:-7s"><span class="tail"></span><span class="body"></span></button> <button class="fish" type="button" aria-label="Hook a turquoise fish" style="top:55%;--fish:#63e2d1;--speed:18s;--delay:-11s"><span class="tail"></span><span class="body"></span></button> <button class="fish" type="button" aria-label="Hook a pink fish" style="top:75%;--fish:#ff93aa;--speed:14s;--delay:-4s"><span class="tail"></span><span class="body"></span></button>
+      <div id="status" class="status" aria-live="polite"></div>
+     </section>
+    </div>
+   </section>
+   <section id="results" class="screen ocean hidden">
+    <div class="shell">
+     <div class="glass result">
+      <div class="icon" aria-hidden="true">
+       🏆
+      </div>
+      <p data-template-id="results-kicker" class="canva-tag eyebrow" style="background: rgb(215, 251, 246); color: rgb(7, 92, 102); font-weight: 800; font-style: normal; font-size: 12px;">Fishing trip complete</p>
+      <h1 data-template-id="results-title" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 32px;">Your Coding Catch</h1>
+      <div id="final-orb" class="orb" aria-label="Final score"></div>
+      <div id="rank" class="badge" aria-live="polite"></div>
+      <p id="rank-copy"></p>
+      <div class="stats">
+       <div class="stat">
+        <small data-template-id="final-score-label" class="canva-text" style="color: rgb(50, 98, 112); font-weight: 800; font-style: normal; font-size: 12px;">Final Score</small><strong id="final-score"></strong>
+       </div>
+       <div class="stat">
+        <small data-template-id="final-time-label" class="canva-text" style="color: rgb(50, 98, 112); font-weight: 800; font-style: normal; font-size: 12px;">Completion Time</small><strong id="final-time"></strong>
+       </div>
+      </div>
+      <div class="actions"><button id="again" type="button" data-template-id="again-button" class="canva-button btn primary" style="background: rgb(255, 118, 87); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 17px;">Play Again ↻</button> <button id="result-home" type="button" data-template-id="result-home-button" class="canva-button btn secondary" style="background: rgb(216, 248, 250); color: rgb(7, 63, 92); font-weight: 800; font-style: normal; font-size: 16px;">Back to Home</button>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <div id="disclaimer-modal" class="overlay show" role="dialog" aria-modal="true" aria-labelledby="disclaimer-title">
+   <div class="modal simple">
+    <div class="icon" aria-hidden="true">
+     🌊
+    </div>
+    <h2 id="disclaimer-title" data-template-id="disclaimer-text" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 24px;">This game is for educational purposes only - Sir Rojas</h2><button id="acknowledge" type="button" data-template-id="acknowledge-button" class="canva-button btn primary" style="background: rgb(255, 118, 87); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Acknowledge</button>
+   </div>
+  </div>
+  <div id="question-modal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="question-title" aria-describedby="feedback">
+   <div class="modal">
+    <div class="modal-head">
+     <small data-template-id="question-label" class="canva-text" style="color: rgb(189, 248, 244); font-weight: 800; font-style: normal; font-size: 11px; letter-spacing: 0.08rem;">Coding catch challenge</small>
+     <p id="question-progress"></p>
+    </div>
+    <div class="modal-body">
+     <h2 id="question-title" class="question"></h2>
+     <div id="answers" class="answers" aria-label="Answer choices"></div>
+     <p id="feedback" class="feedback" aria-live="assertive"></p>
+     <div class="actions"><button id="question-home" type="button" data-template-id="question-home-button" class="canva-button btn secondary" style="background: rgb(216, 248, 250); color: rgb(7, 63, 92); font-weight: 800; font-style: normal; font-size: 16px;">Back to Home</button> <button id="return-sea" type="button" data-template-id="return-button" class="canva-button btn secondary" disabled="" style="background: rgb(216, 248, 250); color: rgb(7, 63, 92); font-weight: 800; font-style: normal; font-size: 16px;">Return to Sea</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="complete-modal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="complete-title">
+   <div class="modal simple">
+    <div class="icon" aria-hidden="true">
+     🐠
+    </div>
+    <p data-template-id="complete-kicker" class="canva-tag eyebrow" style="background: rgb(215, 251, 246); color: rgb(7, 92, 102); font-weight: 800; font-style: normal; font-size: 12px;">Round complete</p>
+    <h2 id="complete-title" data-template-id="complete-title-text" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 24px;">Fantastic Fishing!</h2>
+    <p id="complete-copy"></p>
+    <div class="actions">
+     <button id="continue" type="button" data-template-id="continue-button" class="canva-button btn primary" style="background: rgb(255, 118, 87); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Continue to Round 2</button>
+    </div>
+   </div>
+  </div>
+  <div id="timeout-modal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="timeout-title">
+   <div class="modal simple">
+    <div class="icon" aria-hidden="true">
+     ⏰
+    </div>
+    <p data-template-id="timeout-kicker" class="canva-tag eyebrow" style="background: rgb(255, 241, 206); color: rgb(122, 77, 0); font-weight: 800; font-style: normal; font-size: 12px;">Round timer ended</p>
+    <h2 id="timeout-title" data-template-id="timeout-title-text" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 24px;">The tide ran out!</h2>
+    <p data-template-id="timeout-copy" class="canva-text" style="color: rgb(49, 82, 96); font-weight: 500; font-style: normal; font-size: 16px; line-height: 1.55;">No worries — retry this round with a fresh timer, or restart the whole fishing adventure.</p>
+    <div class="actions"><button id="retry" type="button" data-template-id="retry-button" class="canva-button btn primary" style="background: rgb(255, 118, 87); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Retry Round</button> <button id="restart" type="button" data-template-id="restart-button" class="canva-button btn secondary" style="background: rgb(216, 248, 250); color: rgb(7, 63, 92); font-weight: 800; font-style: normal; font-size: 16px;">Restart Game</button>
+    </div>
+   </div>
+  </div>
+  <div id="exit-modal" class="overlay" role="dialog" aria-modal="true" aria-labelledby="exit-title">
+   <div class="modal simple">
+    <div class="icon" aria-hidden="true">
+     ⚓
+    </div>
+    <h2 id="exit-title" data-template-id="exit-title-text" class="canva-text" style="color: rgb(6, 40, 61); font-weight: 900; font-style: normal; font-size: 24px;">Leave this fishing trip?</h2>
+    <p data-template-id="exit-copy" class="canva-text" style="color: rgb(49, 82, 96); font-weight: 500; font-style: normal; font-size: 16px; line-height: 1.55;">Your current round will be safely abandoned and no new points or unlocked rounds will be added.</p>
+    <div class="actions"><button id="cancel-exit" type="button" data-template-id="cancel-button" class="canva-button btn secondary" style="background: rgb(216, 248, 250); color: rgb(7, 63, 92); font-weight: 800; font-style: normal; font-size: 16px;">Cancel</button> <button id="confirm-exit" type="button" data-template-id="confirm-button" class="canva-button btn danger" style="background: rgb(198, 61, 77); color: rgb(255, 255, 255); font-weight: 800; font-style: normal; font-size: 16px;">Exit to Home</button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const pools = [
+      {title:"Variables",items:[
+        ["A variable is a named storage container used to hold data values in code.",["True","False"],"True","Variables store values that code can use and update."],
+        ["Which of the following is a valid variable name?",["123name","user_age","class","my-score!"],"user_age","Underscores are commonly allowed in variable names."],
+        ["A variable's value can never change once set during execution.",["True","False"],"False","Variables can receive new values while a program runs."],
+        ["What happens when you assign a new value to an existing variable?",["The old value is replaced with the new value.","It creates a second variable automatically.","An error is thrown.","The system adds both values together."],"The old value is replaced with the new value.","Assignment updates the value stored in that variable."],
+        ["Variable names in most modern programming languages are case-sensitive (playerScore vs playerscore).",["True","False"],"True","Capital and lowercase letters can create distinct names."],
+        ["Which of the following is an invalid variable name in most programming languages?",["total_score","_count","2ndPlace","user1"],"2ndPlace","Variable names generally cannot begin with a digit."],
+        ["Variables allow programmers to reuse values throughout a program efficiently.",["True","False"],"True","A stored value can be referenced many times."],
+        ["What is the process of creating a variable for the first time called?",["Deletion","Declaration","Compilation","Iteration"],"Declaration","Declaration creates a variable and its storage."],
+        ["You can use spaces inside variable names, such as my score = 10.",["True","False"],"False","Spaces separate code tokens and cannot be used in names."],
+        ["What symbol is commonly used to assign a value to a variable in code?",["==","=","->",":"],"=","The equals sign is commonly used for assignment."]
+      ]},
+      {title:"Data Types",items:[
+        ["Which data type stores whole numbers like 42 or -10?",["string","boolean","int","char"],"int","An int stores whole numbers."],
+        ["The boolean data type can hold any text value up to 255 characters long.",["True","False"],"False","A boolean stores only true or false."],
+        ["Which data type stores only true or false values?",["boolean","char","int","string"],"boolean","A boolean has only true or false values."],
+        ["A char data type is used to store a single character typically enclosed in single quotes like 'K'.",["True","False"],"True","A char represents a single character."],
+        ["Which data type holds a sequence of text wrapped in double quotes, such as \"Hello World\"?",["char","int","string","boolean"],"string","A string stores a sequence of text characters."],
+        ["The number 3.14 is an example of an integer (int) data type.",["True","False"],"False","3.14 contains a decimal and is not an integer."],
+        ["What is the correct data type for the boolean value true?",["string","boolean","int","char"],"boolean","true and false are boolean values."],
+        ["A string data type can contain letters, numbers, spaces, and special symbols inside quotes.",["True","False"],"True","Strings hold text sequences inside quotation marks."],
+        ["Which data type would you use to store a user's phone number formatted as \"+123456789\"?",["int","char","string","boolean"],"string","Formatted phone numbers are best represented as text."],
+        ["In programming, \"100\" with double quotes and 100 without quotes represent the exact same data type.",["True","False"],"False","Quotation marks make 100 a string rather than an integer."]
+      ]},
+      {title:"Variables + Data Types",items:[
+        ["Which code correctly declares an integer variable score set to 100?",["int score = 100;","string score = \"100\";","boolean score = true;","char score = '100';"],"int score = 100;","100 is a whole number, so int is correct."],
+        ["Declaring int age = \"25\"; causes a type mismatch error because \"25\" is enclosed in double quotes as a string.",["True","False"],"True","Quoted 25 is a string, not an integer."],
+        ["Choose the correct variable declaration to store the single character grade 'A'?",["int grade = 'A';","char grade = 'A';","boolean grade = \"A\";","string grade = 'A';"],"char grade = 'A';","A single quoted character uses char."],
+        ["The declaration boolean isOnline = 'Y'; is valid syntax in standard typed languages.",["True","False"],"False","A boolean needs true or false, not a character."],
+        ["Which line accurately stores whether a user is active online?",["int isActive = \"true\";","string isActive = true;","boolean isActive = true;","char isActive = 'T';"],"boolean isActive = true;","Online status is a true-or-false condition."],
+        ["In string playerName = \"Alex\";, playerName is the variable name and \"Alex\" is a string literal.",["True","False"],"True","The name labels storage and the quoted value is text."],
+        ["What is the correct way to declare a string variable for a player's name?",["string name = \"Maria\";","char name = 'Maria';","int name = Maria;","boolean name = \"Maria\";"],"string name = \"Maria\";","Names are text sequences stored as strings."],
+        ["Updating an integer variable like int energy = 10; energy = energy - 1; changes the stored value to 9.",["True","False"],"True","The assignment stores the computed result back into energy."],
+        ["Identify the bug in this statement: int currentAge = \"18\";",["\"18\" is a string literal (quoted), but currentAge is declared as an int.","The variable name currentAge is invalid.","Integers cannot store numbers greater than 10.","Missing quotes around currentAge."],"\"18\" is a string literal (quoted), but currentAge is declared as an int.","An int should use 18 without quotation marks."],
+        ["Re-assigning a boolean variable boolean isFinished = false; to isFinished = true; is valid during program execution.",["True","False"],"True","A boolean variable may be updated to another boolean value."]
+      ]}
+    ];
+
+    const $ = id => document.getElementById(id);
+    const ROUND_TIME = 90;
+    const state = {
+      round:0,index:0,score:0,unlocked:[true,false,false],completed:[false,false,false],
+      selected:[],answered:false,catching:false,questionOpen:false,seconds:ROUND_TIME,
+      elapsed:0,timer:null,roundScore:0,ack:false,lastFocus:null
+    };
+
+    function shuffle(items){
+      const result=[...items];
+      for(let i=result.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [result[i],result[j]]=[result[j],result[i]];
+      }
+      return result;
+    }
+
+    function fmt(value){return String(Math.floor(value/60)).padStart(2,"0")+":"+String(value%60).padStart(2,"0")}
+    function modal(id,show){$(id).classList.toggle("show",show)}
+    function screen(id){["home","play","results"].forEach(item=>$(item).classList.toggle("hidden",item!==id))}
+    function setStatus(text){$("status").innerHTML=text}
+    function stopTimer(){clearInterval(state.timer);state.timer=null}
+
+    function setFishEnabled(enabled){
+      document.querySelectorAll(".fish").forEach(fish=>{
+        fish.disabled=!enabled;
+        if(enabled)fish.classList.remove("caught");
+      });
+    }
+
+    function update(){
+      $("hud-round").textContent=(state.round+1)+" / 3";
+      $("hud-topic").textContent=pools[state.round].title;
+      $("hud-score").textContent=state.score;
+      $("hud-time").textContent=fmt(state.seconds);
+      $("hud-time").classList.toggle("low",state.seconds<=20);
+      $("stage-title").textContent="Round "+(state.round+1)+": "+pools[state.round].title;
+      $("progress").textContent="Question "+(state.index+1)+" of 5";
+
+      [0,1,2].forEach(index=>{
+        const card=$("card"+(index+1));
+        const small=card.querySelector("small");
+        const icon=card.querySelector("span");
+        card.className="round";
+        if(state.completed[index]){
+          card.classList.add("complete");icon.textContent="✓";small.textContent="Complete";
+        }else if(!state.unlocked[index]){
+          card.classList.add("locked");icon.textContent="🔒";small.textContent="Locked";
+        }else{
+          icon.textContent=["①","②","③"][index];
+          small.textContent=index===state.round?state.index+" / 5":"Ready";
+          if(index===state.round)card.classList.add("active");
+        }
+      });
+    }
+
+    function beginTimer(){
+      stopTimer();
+      state.timer=setInterval(()=>{
+        if(state.catching||state.questionOpen||$("complete-modal").classList.contains("show")||$("exit-modal").classList.contains("show"))return;
+        state.seconds--;
+        state.elapsed++;
+        update();
+        if(state.seconds<=0){
+          stopTimer();
+          setFishEnabled(false);
+          modal("timeout-modal",true);
+          $("retry").focus();
+        }
+      },1000);
+    }
+
+    function pickRound(){state.selected=shuffle(pools[state.round].items).slice(0,5)}
+
+    function resetGame(){
+      stopTimer();
+      Object.assign(state,{
+        round:0,index:0,score:0,unlocked:[true,false,false],completed:[false,false,false],
+        selected:[],answered:false,catching:false,questionOpen:false,seconds:ROUND_TIME,
+        elapsed:0,roundScore:0
+      });
+      pickRound();
+      ["question-modal","complete-modal","timeout-modal","exit-modal"].forEach(id=>modal(id,false));
+      setFishEnabled(true);
+      update();
+      setStatus("Choose a fish to <strong>cast your hook!</strong>");
+    }
+
+    function startGame(){
+      if(!state.ack)return;
+      resetGame();
+      screen("play");
+      beginTimer();
+    }
+
+    function openQuestion(){
+      const question=state.selected[state.index];
+      state.questionOpen=true;
+      $("question-progress").textContent="Round "+(state.round+1)+" · Question "+(state.index+1)+" of 5";
+      $("question-title").textContent=question[0];
+      $("feedback").textContent="";
+      $("feedback").className="feedback";
+      $("return-sea").disabled=true;
+      const answers=$("answers");
+      answers.replaceChildren();
+
+      question[1].forEach(option=>{
+        const button=document.createElement("button");
+        button.className="answer";
+        button.type="button";
+        button.textContent=option;
+        button.dataset.answer=option;
+        answers.appendChild(button);
+      });
+
+      modal("question-modal",true);
+      answers.querySelector("button").focus();
+    }
+
+    function catchFish(fish){
+      if(state.catching||state.questionOpen||state.seconds<=0)return;
+      state.catching=true;
+      setFishEnabled(false);
+      fish.classList.add("caught");
+
+      const sea=fish.closest(".sea").getBoundingClientRect();
+      const box=fish.getBoundingClientRect();
+      const x=box.left+box.width/2-sea.left;
+      const y=box.top+box.height/2-sea.top;
+
+      $("hook").style.left=x+"px";
+      $("ripple").style.left=x+"px";
+      $("ripple").style.top=(y+16)+"px";
+      $("hook").classList.remove("cast");
+      $("ripple").classList.remove("show");
+      void $("hook").offsetWidth;
+      $("hook").classList.add("cast");
+      $("ripple").classList.add("show");
+      setStatus("Hook dropped… <strong>reeling in a coding catch!</strong>");
+
+      setTimeout(()=>{
+        state.catching=false;
+        fish.classList.remove("caught");
+        openQuestion();
+      },850);
+    }
+
+    function answer(button){
+      if(state.answered)return;
+      state.answered=true;
+      const question=state.selected[state.index];
+      const correct=button.dataset.answer===question[2];
+
+      document.querySelectorAll(".answer").forEach(item=>{
+        item.disabled=true;
+        if(item.dataset.answer===question[2])item.classList.add("correct");
+      });
+
+      if(correct){
+        state.score+=10;
+        $("feedback").textContent="Correct catch! +10 points. "+question[3];
+        $("feedback").className="feedback good";
+      }else{
+        button.classList.add("wrong");
+        $("feedback").textContent="Not quite. Correct answer: "+question[2]+". "+question[3];
+        $("feedback").className="feedback bad";
+      }
+
+      $("return-sea").disabled=false;
+      update();
+      $("return-sea").focus();
+    }
+
+    function returnSea(){
+      if(!state.answered)return;
+      modal("question-modal",false);
+      state.questionOpen=false;
+      state.index++;
+      state.answered=false;
+
+      if(state.index>=5){
+        state.completed[state.round]=true;
+        if(state.round<2)state.unlocked[state.round+1]=true;
+        update();
+        $("complete-copy").textContent=state.round===2
+          ?"All 15 questions are complete. Your final coding catch is ready!"
+          :"You completed this round. The next round is now unlocked.";
+        $("continue").textContent=state.round===2?"View My Results":"Continue to Round "+(state.round+2);
+        modal("complete-modal",true);
+        $("continue").focus();
+      }else{
+        setFishEnabled(true);
+        update();
+        setStatus("Great work! Choose the next fish to <strong>keep fishing.</strong>");
+        beginTimer();
+      }
+    }
+
+    function continueRound(){
+      modal("complete-modal",false);
+      if(state.round===2){showResults();return;}
+      state.round++;
+      state.index=0;
+      state.seconds=ROUND_TIME;
+      state.roundScore=state.score;
+      pickRound();
+      setFishEnabled(true);
+      update();
+      setStatus("New waters unlocked! Choose a fish to <strong>cast your hook.</strong>");
+      beginTimer();
+    }
+
+    function showResults(){
+      stopTimer();
+      screen("results");
+      $("final-orb").textContent=state.score;
+      $("final-score").textContent=state.score+" / 150";
+      $("final-time").textContent=fmt(state.elapsed);
+
+      let rank,copy;
+      if(state.score>=130){
+        rank="Master Angler Coder";
+        copy="Exceptional work! You have mastered variables and data types.";
+      }else if(state.score>=80){
+        rank="Skilled Fisher Programmer";
+        copy="Strong coding instincts! Keep practicing to land a perfect score.";
+      }else{
+        rank="Apprentice Fisher";
+        copy="Every great coder learns one catch at a time. Cast again and improve your score!";
+      }
+      $("rank").textContent=rank;
+      $("rank-copy").textContent=copy;
+    }
+
+    function requestExit(){
+      state.lastFocus=document.activeElement;
+      stopTimer();
+      modal("exit-modal",true);
+      $("cancel-exit").focus();
+    }
+
+    function cancelExit(){
+      modal("exit-modal",false);
+      if(!state.questionOpen&&!$("complete-modal").classList.contains("show"))beginTimer();
+      if(state.lastFocus)state.lastFocus.focus();
+    }
+
+    function exitHome(){
+      ["question-modal","complete-modal","timeout-modal","exit-modal"].forEach(id=>modal(id,false));
+      stopTimer();
+      screen("home");
+      $("start").focus();
+    }
+
+    function retryRound(){
+      modal("timeout-modal",false);
+      state.score=state.roundScore;
+      state.index=0;
+      state.answered=false;
+      state.questionOpen=false;
+      state.catching=false;
+      state.seconds=ROUND_TIME;
+      pickRound();
+      setFishEnabled(true);
+      update();
+      setStatus("Fresh timer, fresh catch! Choose a fish to <strong>continue learning.</strong>");
+      beginTimer();
+    }
+
+    function closeUnanswered(){
+      if(!state.questionOpen||state.answered)return;
+      modal("question-modal",false);
+      state.questionOpen=false;
+      setFishEnabled(true);
+      setStatus("Your question is waiting. Catch a fish to <strong>open it again.</strong>");
+      beginTimer();
+    }
+
+    $("acknowledge").addEventListener("click",()=>{
+      state.ack=true;
+      modal("disclaimer-modal",false);
+      $("start").disabled=false;
+      $("start").focus();
+    });
+
+    $("start").addEventListener("click",startGame);
+    $("exit").addEventListener("click",requestExit);
+    $("question-home").addEventListener("click",requestExit);
+    $("cancel-exit").addEventListener("click",cancelExit);
+    $("confirm-exit").addEventListener("click",exitHome);
+    $("return-sea").addEventListener("click",returnSea);
+    $("continue").addEventListener("click",continueRound);
+    $("retry").addEventListener("click",retryRound);
+    $("restart").addEventListener("click",startGame);
+    $("again").addEventListener("click",startGame);
+    $("result-home").addEventListener("click",()=>{screen("home");$("start").focus()});
+
+    $("answers").addEventListener("click",event=>{
+      const button=event.target.closest(".answer");
+      if(button)answer(button);
+    });
+
+    document.querySelector(".sea").addEventListener("click",event=>{
+      const fish=event.target.closest(".fish");
+      if(fish)catchFish(fish);
+    });
+
+    document.addEventListener("keydown",event=>{
+      if(event.key==="Escape"&&$("question-modal").classList.contains("show"))closeUnanswered();
+      if(event.key==="Escape"&&$("exit-modal").classList.contains("show"))cancelExit();
+    });
+
+    update();
+    $("acknowledge").focus();
+  </script>
+ 
+</body></html>
